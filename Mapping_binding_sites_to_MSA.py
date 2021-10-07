@@ -62,7 +62,7 @@ def map_binding_sites_to_msa(binding_sites_file, prot_seq_file, output_resi_map_
         seq_original = seq_aligned.replace('-', '')
         
         ## find new index in aligned seq
-        for resdi in range(old_bindsite_index, len(seq_aligned)+1):
+        for resdi in range(old_bindsite_index, len(seq_aligned) +1 ):
             if(seq_original[0:old_bindsite_index] == seq_aligned[0:resdi].replace('-', '')):
                 new_bindsite_index = resdi
                 break
@@ -111,17 +111,16 @@ def map_binding_sites_to_msa(binding_sites_file, prot_seq_file, output_resi_map_
                     bp_count +=1
             myfile.write(str(resi) + "," + str(bp_count) + '\n' )  
         
-
-uniprotID_to_fa_msa("../raw_binding_mutation/combined_uniprot_H1.txt", "combined_H1.fa")
-uniprotID_to_fa_msa("../raw_binding_mutation/combined_uniprot_H2A.txt", "combined_H2A.fa")
-uniprotID_to_fa_msa("../raw_binding_mutation/combined_uniprot_H2B.txt", "combined_H2B.fa")
-uniprotID_to_fa_msa("../raw_binding_mutation/combined_uniprot_H3.txt", "combined_H3.fa")
-uniprotID_to_fa_msa("../raw_binding_mutation/combined_uniprot_H4.txt", "combined_H4.fa")
-
-map_binding_sites_to_msa("../raw_binding_mutation/PDB_H1_binding_sites.txt","combined_H1_msa.fa", './test/PDB_H1_mapping_binding_sites.txt',"./test/H1_binding_sites_consens_counts_PDB_unique.txt")   
-map_binding_sites_to_msa("../raw_binding_mutation/PDB_H2A_binding_sites.txt","combined_H2A_msa.fa", './test/PDB_H2A_mapping_binding_sites.txt',"./test/H2A_binding_sites_consens_counts_PDB_unique.txt")   
-map_binding_sites_to_msa("../raw_binding_mutation/PDB_H2B_binding_sites.txt","combined_H2B_msa.fa", './test/PDB_H2B_mapping_binding_sites.txt',"./test/H2B_binding_sites_consens_counts_PDB_unique.txt")   
-map_binding_sites_to_msa("../raw_binding_mutation/PDB_H3_binding_sites.txt","combined_H3_msa.fa", './test/PDB_H3_mapping_binding_sites.txt',"./test/H3_binding_sites_consens_counts_PDB_unique.txt")   
-map_binding_sites_to_msa("../raw_binding_mutation/PDB_H4_binding_sites.txt","combined_H4_msa.fa", './test/PDB_H4_mapping_binding_sites.txt',"./test/H4_binding_sites_consens_counts_PDB_unique.txt")   
-
-   
+if __name__=="__main__":
+    uniprotID_to_fa_msa("../raw_binding_mutation/combined_uniprot_H1.txt", "combined_H1.fa")
+    uniprotID_to_fa_msa("../raw_binding_mutation/combined_uniprot_H2A.txt", "combined_H2A.fa")
+    uniprotID_to_fa_msa("../raw_binding_mutation/combined_uniprot_H2B.txt", "combined_H2B.fa")
+    uniprotID_to_fa_msa("../raw_binding_mutation/combined_uniprot_H3.txt", "combined_H3.fa")
+    uniprotID_to_fa_msa("../raw_binding_mutation/combined_uniprot_H4.txt", "combined_H4.fa")
+    
+    map_binding_sites_to_msa("../raw_binding_mutation/PDB_H1_binding_sites.txt","combined_H1_msa.fa", './test/PDB_H1_mapping_binding_sites.txt',"./test/H1_binding_sites_consens_counts_PDB_unique.txt")   
+    map_binding_sites_to_msa("../raw_binding_mutation/PDB_H2A_binding_sites.txt","combined_H2A_msa.fa", './test/PDB_H2A_mapping_binding_sites.txt',"./test/H2A_binding_sites_consens_counts_PDB_unique.txt")   
+    map_binding_sites_to_msa("../raw_binding_mutation/PDB_H2B_binding_sites.txt","combined_H2B_msa.fa", './test/PDB_H2B_mapping_binding_sites.txt',"./test/H2B_binding_sites_consens_counts_PDB_unique.txt")   
+    map_binding_sites_to_msa("../raw_binding_mutation/PDB_H3_binding_sites.txt","combined_H3_msa.fa", './test/PDB_H3_mapping_binding_sites.txt',"./test/H3_binding_sites_consens_counts_PDB_unique.txt")   
+    map_binding_sites_to_msa("../raw_binding_mutation/PDB_H4_binding_sites.txt","combined_H4_msa.fa", './test/PDB_H4_mapping_binding_sites.txt',"./test/H4_binding_sites_consens_counts_PDB_unique.txt")   
+    
