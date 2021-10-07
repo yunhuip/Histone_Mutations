@@ -62,7 +62,7 @@ def map_binding_sites_to_msa(binding_sites_file, prot_seq_file, output_resi_map_
         seq_original = seq_aligned.replace('-', '')
         
         ## find new index in aligned seq
-        for resdi in range(old_bindsite_index, len(seq_aligned)):
+        for resdi in range(old_bindsite_index, len(seq_aligned)+1):
             if(seq_original[0:old_bindsite_index] == seq_aligned[0:resdi].replace('-', '')):
                 new_bindsite_index = resdi
                 break
