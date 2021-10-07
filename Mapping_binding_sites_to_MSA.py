@@ -37,13 +37,13 @@ def read_prot_sequences(prot_seq_file):
             prot_seq[uniprotID] = aligned_seq
     return prot_seq 
         
-### mapping binding site in the aligned histone sequences and count binding partners per sites   
+### map binding or mutation site onto the aligned histone sequences and count # of  partners per sites   
 def map_binding_sites_to_msa(binding_sites_file, prot_seq_file, output_resi_map_per_his,output_resi_map_consensus): 
 #    binding_sites_file = "../raw_binding_mutation/PDB_H2A_binding_sites.txt"
 #    prot_seq_file = "combined_H2A_msa.fa"
     
-    ## read data files contain the binding sites sites informations 
-    df = pd.read_table(binding_sites_file, skiprows = 1, header=None,     \
+    ## read data files contain the binding sites sites data
+    df = pd.read_table(binding_sites_file, header=None,     \
                           names = ["histone_uniprot_ID", "histone_type", "binding_site_index", \
                                    "partner_uniprot_ID", "sources"]) 
     #read aligned histone sequences from msa file
@@ -62,10 +62,12 @@ def map_binding_sites_to_msa(binding_sites_file, prot_seq_file, output_resi_map_
         seq_original = seq_aligned.replace('-', '')
         
         ## find new index in aligned seq
+        new_bindsite_index = int
         for resdi in range(old_bindsite_index, len(seq_aligned) +1 ):
             if(seq_original[0:old_bindsite_index] == seq_aligned[0:resdi].replace('-', '')):
                 new_bindsite_index = resdi
                 break
+
          ## save new residue index to dataframe
         if data_source == "PDB" :
             new_binding_sites_msa = new_binding_sites_msa.append({"his_uniprot_ID": his_uniprot_ID, \
@@ -124,3 +126,4 @@ if __name__=="__main__":
     map_binding_sites_to_msa("../raw_binding_mutation/PDB_H3_binding_sites.txt","combined_H3_msa.fa", './test/PDB_H3_mapping_binding_sites.txt',"./test/H3_binding_sites_consens_counts_PDB_unique.txt")   
     map_binding_sites_to_msa("../raw_binding_mutation/PDB_H4_binding_sites.txt","combined_H4_msa.fa", './test/PDB_H4_mapping_binding_sites.txt',"./test/H4_binding_sites_consens_counts_PDB_unique.txt")   
     
+       
